@@ -21,7 +21,7 @@ if($linhas > 0){
 	$nivel_usuario = $res[0]['nivel'];
 	$foto_usuario = $res[0]['foto'];
 	$telefone_usuario = $res[0]['telefone'];
-	$cpf_usuario = $res[0]['cpf'];
+	//$cpf_usuario = $res[0]['cpf'];
 	$endereco_usuario = $res[0]['endereco'];
 }
 
@@ -29,10 +29,10 @@ if($linhas > 0){
 <!DOCTYPE HTML>
 <html>
 <head>
-	<title>Sistema</title>
+	<title><?php echo $nome_sistema ?></title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<link rel="shortcut icon" href="" type="image/x-icon">
+	<link rel="shortcut icon" href="../img/logo.png" type="image/x-icon">
 
 	<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 
@@ -114,6 +114,8 @@ if($linhas > 0){
 	</script>
 	<!-- //pie-chart --><!-- index page sales reviews visitors pie chart -->
 
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.13.2/datatables.min.css"/> 
+<script src="https://cdn.datatables.net/v/dt/dt-1.13.2/datatables.min.js"></script>
 	
 </head> 
 <body class="cbp-spmenu-push">
@@ -129,7 +131,7 @@ if($linhas > 0){
 							<span class="icon-bar"></span>
 							<span class="icon-bar"></span>
 						</button>
-						<h1><a class="navbar-brand" href="index.php"><span class="fa fa-cutlery"></span> Sistema<span class="dashboard_text">Nome do Sistema</span></a></h1>
+						<h1><a class="navbar-brand" href="index.php"><span class="fa fa-globe"></span> Sistema<span class="dashboard_text"><?php echo $nome_sistema ?></span></a></h1>
 					</div>
 					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 						<ul class="sidebar-menu">
@@ -320,7 +322,7 @@ if($linhas > 0){
 
 
 	<!-- Mascaras JS -->
-<script type="text/javascript" src="../../js/mascaras.js"></script>
+<script type="text/javascript" src="js/mascaras.js"></script>
 
 <!-- Ajax para funcionar Mascaras JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script> 
@@ -367,10 +369,7 @@ if($linhas > 0){
 								<input type="text" class="form-control" id="telefone_perfil" name="telefone" placeholder="Seu Telefone" value="<?php echo $telefone_usuario ?>" required>							
 						</div>
 
-						<div class="col-md-6">							
-								<label>CPF</label>
-								<input type="text" class="form-control" id="cpf_perfil" name="cpf" placeholder="Seu CPF" value="<?php echo $cpf_usuario ?>">							
-						</div>
+						
 					</div>
 
 
@@ -462,8 +461,8 @@ if($linhas > 0){
 						</div>
 
 						<div class="col-md-3">							
-								<label>Telefone Fixo</label>
-								<input type="text" class="form-control" id="telefone_fixo" name="telefone_fixo" placeholder="Telefone Fixo" value="<?php echo @$telefone_fixo ?>" >							
+								<label>Ramal</label>
+								<input type="text" class="form-control" id="rama" name="ramal" placeholder="Ramal" value="<?php echo @$ramal ?>" >							
 						</div>
 					</div>
 
@@ -483,7 +482,7 @@ if($linhas > 0){
 
 
 					<div class="row">
-						<div class="col-md-3">							
+						<div class="col-md-5">							
 								<label>Tipo Relatório</label>
 								<select class="form-control" name="tipo_rel">
 									<option value="PDF" <?php if(@$tipo_rel == 'PDF'){?> selected <?php } ?> >PDF</option>
@@ -491,7 +490,17 @@ if($linhas > 0){
 								</select>							
 						</div>
 
-						
+						<div class="col-md-5">						
+								<div class="form-group"> 
+									<label>Logo Relatório (*Jpg)</label> 
+									<input class="form-control" type="file" name="foto-logo-rel" onChange="carregarImgLogoRel();" id="foto-logo-rel">
+								</div>						
+							</div>
+							<div class="col-md-2">
+								<div id="divImg">
+									<img src="../img/<?php echo @$logo_rel ?>"  width="50%" id="target-logo-rel">									
+								</div>
+							</div>
 
 					</div>
 
@@ -509,7 +518,7 @@ if($linhas > 0){
 							</div>
 							<div class="col-md-2">
 								<div id="divImg">
-									<img src="../../img/<?php echo $logo_sistema ?>"  width="80px" id="target-logo">									
+									<img src="../img/<?php echo $logo_sistema ?>"  width="80px" id="target-logo">									
 								</div>
 							</div>
 
@@ -522,32 +531,14 @@ if($linhas > 0){
 							</div>
 							<div class="col-md-2">
 								<div id="divImg">
-									<img src="../../img/<?php echo $favicon_sistema ?>"  width="50px" id="target-icone">									
+									<img src="../img/<?php echo $icone_sistema ?>"  width="50px" id="target-icone">									
 								</div>
 							</div>
 
 						
 					</div>
 
-
-
-
-					<div class="row">
-							<div class="col-md-4">						
-								<div class="form-group"> 
-									<label>Logo Relatório (*Jpg)</label> 
-									<input class="form-control" type="file" name="foto-logo-rel" onChange="carregarImgLogoRel();" id="foto-logo-rel">
-								</div>						
-							</div>
-							<div class="col-md-2">
-								<div id="divImg">
-									<img src="../../img/<?php echo @$logo_rel ?>"  width="80px" id="target-logo-rel">									
-								</div>
-							</div>
-
-
 						
-					</div>					
 				
 
 				<br>
